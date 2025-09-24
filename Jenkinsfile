@@ -22,7 +22,7 @@ pipeline {
         }
       }
     }
-    stage('Build and Push Docker Image') {
+  /*  stage('Build and Push Docker Image') {
       environment {
         DOCKER_IMAGE = "hdxt25/ultimate-cicd:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
@@ -37,7 +37,7 @@ pipeline {
             }
         }
       }
-    }
+    }*/
     stage('Build and Push Docker Image') {
     environment {
         DOCKER_IMAGE = "hdxt25/ultimate-cicd:${BUILD_NUMBER}"
