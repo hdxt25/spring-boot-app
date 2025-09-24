@@ -48,6 +48,7 @@ pipeline {
         script {
             // Verify Docker daemon is accessible
             sh "docker info"
+            sh "docker --host ${DOCKER_HOST} info"
 
             // Build Docker image
             sh "docker build -t ${DOCKER_IMAGE} ."
