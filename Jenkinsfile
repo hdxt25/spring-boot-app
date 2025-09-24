@@ -38,32 +38,32 @@ pipeline {
         }
       }
     }
-  /*  stage('Build and Push Docker Image') {
+    stage('Build and Push Docker Image') {
     environment {
         DOCKER_IMAGE = "hdxt25/ultimate-cicd:${BUILD_NUMBER}"
-        REGISTRY_CREDENTIALS = credentials('docker-cred')  // Jenkins credential ID
-        DOCKER_HOST = "/Users/himanshu/.colima/default/docker.sock"  // Colima Docker socket
     }
     steps {
         script {
-            // Verify Docker daemon is accessible
-            sh "docker info"
-            sh "docker --host ${DOCKER_HOST} info"
+            withCredentials([usernamePassword(credentialsId: 'docker-cred', 
+                                             usernameVariable: 'DOCKER_USER', 
+                                             passwordVariable: 'DOCKER_PASS')]) {
+                sh """
+                    # Login to Docker Hub
+                    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
 
-            // Build Docker image
-            sh "docker build -t ${DOCKER_IMAGE} ."
+                    # Build the Docker image
+                    docker build -t ${DOCKER_IMAGE} .
 
-            // Login to Docker Hub using credentials from Jenkins
-            sh "echo ${REGISTRY_CREDENTIALS_PSW} | docker login -u ${REGISTRY_CREDENTIALS_USR} --password-stdin"
+                    # Push the Docker image
+                    docker push ${DOCKER_IMAGE}
 
-            // Push Docker image
-            sh "docker push ${DOCKER_IMAGE}"
-
-            // Optional: logout after push
-            sh "docker logout"
+                    # Logout for security
+                    docker logout
+                """
+            }
         }
     }
-}*/
+}
     stage('Update Deployment File') {
         environment {
             GIT_REPO_NAME = "spring-boot-app"
