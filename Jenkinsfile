@@ -2,7 +2,8 @@ pipeline {
   agent {
     docker {
       image 'hdxt25/agent:v1' 
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
+      args '-v /Users/himanshu/.colima/default/docker.sock:/var/run/docker.sock'
+    //  args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
   stages {
