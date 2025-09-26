@@ -70,7 +70,7 @@ pipeline {
     }
     stage("check container health"){
         steps{
-          sh 'docker stats'
+          sh 'docker stats --no-stream'
         }
     }
   }
