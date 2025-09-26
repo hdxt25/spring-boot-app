@@ -67,5 +67,10 @@ pipeline {
             }
         }
     }
+    stage("check container health"){
+        steps{
+          sh 'docker stats'
+        }
+    }
   }
 }
