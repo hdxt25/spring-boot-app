@@ -58,6 +58,7 @@ pipeline {
                 sh '''
                     git config user.email "hdxt25@gmail.com"
                     git config user.name "himanshu"
+                    git config --global --add safe.directory $WORKSPACE
                     git checkout main
                     BUILD_NUMBER=${BUILD_NUMBER}
                     sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" spring-boot-app-manifests/deployment.yml
