@@ -1,4 +1,4 @@
-FROM maven:3.11-eclipse-temurin-11
+FROM maven:3.9.11-eclipse-temurin-17
 
 # Install Docker CLI
 USER root
